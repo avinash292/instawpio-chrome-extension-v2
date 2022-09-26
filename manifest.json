@@ -1,0 +1,37 @@
+{
+  "name": "InstaWP Launcher v2",
+  "description": "Freshly baked WP instances with pre-loaded WP.org plugins/themes",
+  "homepage_url": "https://app.instawp.io",
+  "version": "2.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Open InstaWP Dashboard with version2"
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "activeTab"
+  ],
+  "host_permissions": ["https://app.instawp.io/*"],
+  "content_scripts": [{
+    "js": ["do.js", "swtalrt.js", "pagination.js"],
+    "css": ["style.css", "pagination.css"],
+    "matches": [
+      "https://wordpress.org/*",
+      "https://wordpress.org/plugins*",
+      "https://wordpress.org/themes*"
+    ]
+  }],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "web_accessible_resources": [{
+    "resources": ["do.js"],
+    "matches": ["<all_urls>"]
+  }]
+}
