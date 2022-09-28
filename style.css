@@ -287,16 +287,32 @@ body {
 }
 
 .modal-content .modal-body table tr .siteNameDiv .siteNameDiv1 {
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 16px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
+}
+.phpVersion{
+    margin-left: 10px;;
 }
 
-.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan span {
+.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteUrl {
     width: auto;
     float: left;
     font-size: 12px;
     font-weight: bold;
+    position: relative;
+    color: #464343;
+}
+
+.launchInstawp-btn{
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 8px !important;
+}
+.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteMadeTime {
+    width: auto;
+    float: left;
+    font-size: 13px;
     position: relative;
     color: #464343;
 }

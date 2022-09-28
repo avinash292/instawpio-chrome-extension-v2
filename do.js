@@ -6,11 +6,9 @@
   var sitID = [];
   var sitUrl = [];
   var siteMadeTime = [];
+  var sitePhpVersion = [];
+  var siteWpVersion = [];
   const token = localStorage.getItem("InstaWPAPIKey");
-  // document.body.addEventListener("click", removeclass, true);
-  // function removeclass() {
-  //   document.body.classList.remove("modal-open");
-  // }
   async function fetchSite() {
     let siteResponse = await fetch("https://app.instawp.io/api/v1/sites", {
       headers: {
@@ -24,6 +22,9 @@
     sitID = sites.map((item) => item.id);
     sitUrl = sites.map((item) => item.url);
     siteMadeTime = sites.map((item) => item.added_at);
+    sitePhpVersion = sites.map((item) => item.php_version);
+    siteWpVersion = sites.map((item) => item.wp_version);
+
     console.log(sites);
   }
   if (token) {
@@ -161,7 +162,7 @@
       .querySelector(".button.button-secondary.alignleft")
       .cloneNode(true);
     launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch';
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
     launcher.classList.add("instawp-btn");
     launcher.classList.remove("button-secondary");
     launcher.id = "instawp-btn-theme";
@@ -226,7 +227,14 @@
       tablerowdatadiv1.classList.add("siteNameDiv");
       var tablerowdatadiv1Sitename = document.createElement("div");
       tablerowdatadiv1Sitename.classList.add("siteNameDiv1");
-      tablerowdatadiv1Sitename.innerHTML = sitName[i + 1];
+      var tablerowdatadiv1SiteWpVersion = document.createElement("span");
+      tablerowdatadiv1SiteWpVersion.classList.add("wpVersion");
+      tablerowdatadiv1SiteWpVersion.innerHTML =
+        "Wp Version: <b>" + siteWpVersion[i] + "</b>";
+      var tablerowdatadiv1SitePhpVersion = document.createElement("span");
+      tablerowdatadiv1SitePhpVersion.classList.add("phpVersion");
+      tablerowdatadiv1SitePhpVersion.innerHTML =
+        "PHP Version: <b>" + sitePhpVersion[i] + "</b> ";
       var tablerowdataspanDiv = document.createElement("div");
       tablerowdataspanDiv.classList.add("siteNameDivspan");
       var tablerowdatadiv1Siteurl = document.createElement("span");
@@ -234,7 +242,9 @@
       tablerowdatadiv1Siteurl.innerHTML = sitUrl[i];
       var tablerowdatadiv1SiteTime = document.createElement("span");
       tablerowdatadiv1SiteTime.classList.add("siteMadeTime");
-      tablerowdatadiv1SiteTime.innerHTML = dateconversion(siteMadeTime[i]);
+      // tablerowdatadiv1SiteTime.innerHTML = dateconversion(siteMadeTime[i]);
+      tablerowdatadiv1SiteTime.innerHTML =
+        "Added At: <b>" + siteMadeTime[i] + "</b>";
       var tablerowdatadiv2 = document.createElement("div");
       tablerowdatadiv2.classList.add("installBtn");
       tablerowdatadiv2.innerHTML = "Install";
@@ -243,8 +253,10 @@
       tablerowdatadiv2.addEventListener("click", launchOptionSiteScript3);
       tablerowdataspanDiv.appendChild(tablerowdatadiv1Siteurl);
       tablerowdataspanDiv.appendChild(tablerowdatadiv1SiteTime);
-      tablerowdatadiv1.appendChild(tablerowdatadiv1Sitename);
       tablerowdatadiv1.appendChild(tablerowdataspanDiv);
+      tablerowdatadiv1Sitename.appendChild(tablerowdatadiv1SiteWpVersion);
+      tablerowdatadiv1Sitename.appendChild(tablerowdatadiv1SitePhpVersion);
+      tablerowdatadiv1.appendChild(tablerowdatadiv1Sitename);
       tablerowdata.appendChild(tablerowdatadiv1);
       tablerowdata.appendChild(tablerowdatadiv2);
       tablerow.appendChild(tablerowdata);
@@ -293,36 +305,44 @@
   function callbtn() {
     pathArray = getURLPathArray();
     var array = sitName;
-    array.unshift("Lanch New Website");
+    // array.unshift("Lanch New Website");
     var sitIDArray = sitID;
-    sitIDArray.unshift("1");
+    // sitIDArray.unshift("1");
     var selectList = document.createElement("div");
     selectList.id = "instawp-btn-theme1";
     selectList.classList.add("instawp-btn", "displayNone", "displaypluginbtn");
     selectList.href = "javascript:void(0)";
     var ulList = document.createElement("ul");
-    for (var i = 0; i < array.length; i++) {
+    if (array.length == "") {
       var option = document.createElement("li");
-      option.innerHTML = array[i];
-      option.setAttribute("data-site-id", sitIDArray[i]);
+      option.innerHTML = "No Site Found!";
+      option.style.color = "red";
       ulList.appendChild(option);
-      if (pathArray[1] == "themes") {
-        option.addEventListener("click", launchOptionSiteScript3);
+    } else {
+      for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("li");
+        option.innerHTML = array[i];
+        option.setAttribute("data-site-id", sitIDArray[i]);
+        ulList.appendChild(option);
+        if (pathArray[1] == "themes") {
+          option.addEventListener("click", launchOptionSiteScript3);
+        }
+        if (pathArray[1] == "plugins") {
+          option.addEventListener("click", launchOptionSiteScript2);
+        }
+        if (i > 1) {
+          break;
+        }
       }
-      if (pathArray[1] == "plugins") {
-        option.addEventListener("click", launchOptionSiteScript2);
-      }
-      if (i > 2) {
-        break;
+      if (array.length > 3) {
+        var option = document.createElement("li");
+        option.innerHTML = "Browse All Sites";
+        option.setAttribute("class", "browsAllSite");
+        ulList.appendChild(option);
+        option.addEventListener("click", showAllSite);
       }
     }
-    if (array.length > 4) {
-      var option = document.createElement("li");
-      option.innerHTML = "Brows All Site";
-      option.setAttribute("class", "browsAllSite");
-      ulList.appendChild(option);
-      option.addEventListener("click", showAllSite);
-    }
+
     selectList.appendChild(ulList);
     if (document.querySelector(".theme-actions.clear")) {
       document.querySelector(".theme-actions.clear").appendChild(selectList);
@@ -455,7 +475,7 @@
       .getElementsByClassName("plugin-download")[0]
       .cloneNode(true);
     launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch';
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
     launcher.classList.add("instawp-btn", "launchPluginBtn");
     launcher.classList.remove("download-button");
     launcher.id = "instawp-btn-theme";
@@ -539,12 +559,14 @@
         document.querySelector(".plugin-download")
       ) {
         //for plugin detail page
+        addLaunchPluginButton();
         addPluginLaunchButton();
       } else if (
         pathArray[1] == "themes" &&
         document.querySelector(".button.button-secondary.alignleft")
       ) {
         //for theme detail page
+        addLaunchThemeButton();
         addThemeLaunchButton();
       } else if (
         pathArray[1] == "themes" &&
@@ -573,5 +595,34 @@
         tr[i].style.display = "none";
       }
     }
+  }
+
+  function addLaunchThemeButton() {
+    //add launch button to theme detail page.
+    var launcher = document
+      .querySelector(".button.button-secondary.alignleft")
+      .cloneNode(true);
+    launcher.innerHTML =
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch New Website';
+    launcher.classList.add("instawp-btn", "launchInstawp-btn");
+    launcher.classList.remove("button-secondary");
+    launcher.id = "instawp-btn";
+    launcher.href = "javascript:void(0)";
+    launcher.addEventListener("click", launchSiteScript3);
+    document.querySelector(".theme-actions.clear").appendChild(launcher);
+    addCloseButtonevent();
+  }
+  function addLaunchPluginButton() {
+    //add launch button to plugin detail page.
+    var launcher = document
+      .getElementsByClassName("plugin-download")[0]
+      .cloneNode(true);
+    launcher.innerHTML =
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch New Website';
+    launcher.classList.add("instawp-btn", "launchPluginInstawp-btn");
+    launcher.id = "instawp-btn";
+    launcher.href = "javascript:void(0)";
+    launcher.addEventListener("click", launchSiteScript2);
+    document.getElementsByClassName("plugin-actions")[0].appendChild(launcher);
   }
 })();
