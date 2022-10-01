@@ -359,11 +359,16 @@
       var tablerowdataspanDiv = document.createElement("div");
       tablerowdataspanDiv.classList.add("siteNameDivspan");
       var externalLink = document.createElement("img");
+<<<<<<< HEAD
       externalLink.src = chrome.runtime.getURL("iconImages/link2.png");
+=======
+      externalLink.src = chrome.runtime.getURL("link.png");
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       externalLink.setAttribute("height", "16");
       externalLink.setAttribute("width", "16");
       externalLink.setAttribute("alt", "openlink");
       var copyLinkIcon = document.createElement("img");
+<<<<<<< HEAD
       copyLinkIcon.src = chrome.runtime.getURL("iconImages/copy.png");
       copyLinkIcon.setAttribute("height", "16");
       copyLinkIcon.setAttribute("data-url", sitUrl[i]);
@@ -374,11 +379,21 @@
       copyLinkIcon.classList.add("tooltip");
       var clockIcon = document.createElement("img");
       clockIcon.src = chrome.runtime.getURL("iconImages/clock.png");
+=======
+      copyLinkIcon.src = chrome.runtime.getURL("copy.png");
+      copyLinkIcon.setAttribute("height", "16");
+      copyLinkIcon.setAttribute("width", "16");
+      copyLinkIcon.setAttribute("alt", "open");
+
+      var clockIcon = document.createElement("img");
+      clockIcon.src = chrome.runtime.getURL("clock.png");
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       clockIcon.setAttribute("height", "16");
       clockIcon.setAttribute("width", "16");
       clockIcon.setAttribute("alt", "open");
       var clockP = document.createElement("p");
       clockP.classList.add("clockp");
+<<<<<<< HEAD
       clockP.innerHTML = siteMadeTime[i];
       if (siteMadeTime[i] == "Site Expired") {
         clockP.innerHTML = siteMadeTime[i] + "!!";
@@ -386,20 +401,35 @@
       }
       var wpIcon = document.createElement("img");
       wpIcon.src = chrome.runtime.getURL("iconImages/wp.png");
+=======
+      clockP.innerHTML = "<b>" + siteMadeTime[i] + "</b>";
+      var wpIcon = document.createElement("img");
+      wpIcon.src = chrome.runtime.getURL("wordpress.png");
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       wpIcon.setAttribute("height", "16");
       wpIcon.setAttribute("width", "16");
       wpIcon.setAttribute("alt", "open");
       var wpP = document.createElement("p");
       wpP.classList.add("wpP");
+<<<<<<< HEAD
       wpP.innerHTML = siteWpVersion[i];
       var phpIcon = document.createElement("img");
       phpIcon.src = chrome.runtime.getURL("iconImages/php2.png");
+=======
+      wpP.innerHTML = "<b>" + siteWpVersion[i] + "</b>";
+      var phpIcon = document.createElement("img");
+      phpIcon.src = chrome.runtime.getURL("php.png");
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       phpIcon.setAttribute("height", "16");
       phpIcon.setAttribute("width", "16");
       phpIcon.setAttribute("alt", "open");
       var phpP = document.createElement("p");
       phpP.classList.add("phpP");
+<<<<<<< HEAD
       phpP.innerHTML = sitePhpVersion[i];
+=======
+      phpP.innerHTML = "<b>" + sitePhpVersion[i] + "</b>";
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       var linkUrl = document.createElement("a");
       linkUrl.classList.add("linkUrl");
       linkUrl.href = sitUrl[i];
@@ -408,6 +438,7 @@
       var copyLink = document.createElement("p");
       copyLink.classList.add("copyLink");
       copyLink.id = "copyUrl";
+<<<<<<< HEAD
       copyLink.addEventListener("click", copyUrl);
       var tooltipP = document.createElement("p");
       tooltipP.classList.add("tooltip", "tooltippara", "copyLink");
@@ -417,16 +448,30 @@
       tooltip.innerText = "Copied!!";
       copyLink.appendChild(copyLinkIcon);
       tooltipP.appendChild(tooltip);
+=======
+      copyLink.setAttribute("data-url", sitUrl[i]);
+      copyLink.addEventListener("click", copyUrl);
+      copyLink.appendChild(copyLinkIcon);
+
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       var tablerowdatadiv1Siteurl = document.createElement("span");
       tablerowdatadiv1Siteurl.classList.add("siteUrl");
       tablerowdatadiv1Siteurl.innerHTML = sitUrl[i];
       tablerowdatadiv1Siteurl.append(linkUrl);
       tablerowdatadiv1Siteurl.append(copyLink);
+<<<<<<< HEAD
       tablerowdatadiv1Siteurl.append(tooltipP);
+=======
+
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       var tablerowdatadiv1SiteTime = document.createElement("span");
       tablerowdatadiv1SiteTime.classList.add("siteMadeTime");
       tablerowdatadiv1SiteTime.appendChild(clockIcon);
       tablerowdatadiv1SiteTime.appendChild(clockP);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       var tablerowdatadiv2 = document.createElement("div");
       tablerowdatadiv2.classList.add("installBtn");
       tablerowdatadiv2.innerHTML = "Install";
@@ -436,10 +481,20 @@
       tablerowdataspanDiv.appendChild(tablerowdatadiv1Siteurl);
       tablerowdataspanDiv.appendChild(tablerowdatadiv1SiteTime);
       tablerowdatadiv1.appendChild(tablerowdataspanDiv);
+<<<<<<< HEAD
       tablerowdatadiv1Sitename.appendChild(wpIcon);
       tablerowdatadiv1Sitename.appendChild(wpP);
       tablerowdatadiv1Sitename.appendChild(phpIcon);
       tablerowdatadiv1Sitename.appendChild(phpP);
+=======
+
+      tablerowdatadiv1Sitename.appendChild(wpIcon);
+      tablerowdatadiv1Sitename.appendChild(wpP);
+
+      tablerowdatadiv1Sitename.appendChild(phpIcon);
+      tablerowdatadiv1Sitename.appendChild(phpP);
+
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
       tablerowdatadiv1.appendChild(tablerowdatadiv1Sitename);
       tablerowdata.appendChild(tablerowdatadiv1);
       tablerowdata.appendChild(tablerowdatadiv2);
@@ -692,5 +747,11 @@
     setTimeout(function () {
       document.getElementById(id).style.visibility = "hidden";
     }, 500);
+  }
+
+  function copyUrl(evt) {
+    var url = document.getElementById("copyUrl").getAttribute("data-url");
+    navigator.clipboard.writeText(url);
+    alert("Url Copied");
   }
 })();

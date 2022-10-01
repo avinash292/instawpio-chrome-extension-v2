@@ -31,7 +31,11 @@
     "128": "icon.png"    
   },
   "web_accessible_resources": [{
+<<<<<<< HEAD
     "resources": ["do.js","iconImages/link.png","iconImages/link2.png","iconImages/copy.png","iconImages/copy2.png","iconImages/clock.png","iconImages/clock2.png","iconImages/wp.png","iconImages/wp2.png","iconImages/php.png","iconImages/php1.png","iconImages/php2.png"],
+=======
+    "resources": ["do.js","link.png","copy.png","clock.png","wordpress.png","php.png"],
+>>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
     "matches": ["<all_urls>"]
   }]
 }
