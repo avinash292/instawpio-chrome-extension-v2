@@ -1,6 +1,6 @@
 (function () {
   //console.log('before.js executed');
-  pathArray = getURLPathArray();
+
   var sites = [];
   var sitName = [];
   var sitID = [];
@@ -10,49 +10,75 @@
   var siteWpVersion = [];
   const token = localStorage.getItem("InstaWPAPIKey");
   async function fetchSite() {
-    let siteResponse = await fetch("https://app.instawp.io/api/v1/sites", {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    let siteResponse = await fetch(
+      "https://app.instawp.io/api/v2/sites?page=1&per_page=10",
+      {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const SiteData = await siteResponse.json();
-    sites = SiteData.data.sites.data;
+    // console.log(SiteData);
+    sites = SiteData.data;
     sitName = sites.map((item) => item.name);
     sitID = sites.map((item) => item.id);
     sitUrl = sites.map((item) => item.url);
-    siteMadeTime = sites.map((item) => item.added_at);
+    siteMadeTime = sites.map((item) => item.expired_at_format);
     sitePhpVersion = sites.map((item) => item.php_version);
     siteWpVersion = sites.map((item) => item.wp_version);
-
-    console.log(sites);
+    // console.log(siteMadeTime);
   }
   if (token) {
     fetchSite();
   }
-  addCreateWebsiteButton();
+  function addLaunchThemeButton() {
+    //add launch button to theme detail page.
+    var launcher = document
+      .querySelector(".button.button-secondary.alignleft")
+      .cloneNode(true);
+    launcher.innerHTML =
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch New Website';
 
-  function dateconversion(t) {
-    var today = new Date();
-    var createdate = new Date(t);
-    var diffMs = today - createdate; // milliseconds between now & Christmas
-    var diffDays = Math.floor(diffMs / 86400000); // days
-    var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
-    var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
-    console.log(
-      diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes"
-    );
-    var created_at =
-      "Created At: " +
-      diffDays +
-      " days, " +
-      diffHrs +
-      " hours, " +
-      diffMins +
-      " minutes";
-    return created_at;
+    launcher.classList.add("instawp-btn", "launchInstawp-btn");
+    launcher.classList.remove("button-secondary");
+    launcher.id = "instawp-btn";
+    launcher.href = "javascript:void(0)";
+    launcher.addEventListener("click", launchSiteScript3);
+    document.querySelector(".theme-actions.clear").appendChild(launcher);
+    addCloseButtonevent();
   }
-
+  function addLaunchPluginButton() {
+    //add launch button to plugin detail page.
+    var launcher = document
+      .getElementsByClassName("plugin-download")[0]
+      .cloneNode(true);
+    launcher.innerHTML =
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch New Website';
+    launcher.classList.add("instawp-btn", "launchPluginInstawp-btn");
+    launcher.id = "instawp-btn";
+    launcher.href = "javascript:void(0)";
+    launcher.addEventListener("click", launchSiteScript2);
+    document.getElementsByClassName("plugin-actions")[0].appendChild(launcher);
+  }
+  pathArray = getURLPathArray();
+  if (pathArray[1] == "plugins" && document.querySelector(".plugin-download")) {
+    //for plugin detail page
+    addLaunchPluginButton();
+  } else if (
+    pathArray[1] == "themes" &&
+    document.querySelector(".button.button-secondary.alignleft")
+  ) {
+    addThemeLaunchButton();
+  } else if (
+    pathArray[1] == "themes" &&
+    document.querySelector(".js-load-more-themes")
+  ) {
+    //for theme list page
+    addClickEventToThemeURL();
+  }
+  addCreateWebsiteButton();
   function addClickEventToThemeURL() {
     //add onclick event to all theme detail urls.
     var el = document.querySelectorAll(".url");
@@ -117,195 +143,30 @@
     NewElement.addEventListener("click", launchSiteScript4);
   }
 
-  function addThemeLaunchButton() {
-    //add launch button to theme detail page.
-    var InstaWPAPIKey = localStorage.getItem("InstaWPAPIKey");
-    if (InstaWPAPIKey) {
-      showLaunchThemebutton();
-    } else {
-      generateLanchThemeButton();
-    }
-  }
-
-  function generateLanchThemeButton() {
-    var input = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.setAttribute("id", "apiToken");
-    input.setAttribute("class", "themeTokenInput");
-    input.setAttribute("placeholder", "Enter InstaWP API Key");
-    var button = document.createElement("input");
-    button.setAttribute("type", "button");
-    button.setAttribute("id", "subminbtn");
-    button.setAttribute("value", "Add");
-    button.setAttribute("class", "themeTokenSubmit");
-    document.querySelector(".theme-actions.clear").appendChild(input);
-    document.querySelector(".theme-actions.clear").appendChild(button);
-    button.addEventListener("click", launchThemeButton);
-  }
-
-  function launchThemeButton() {
-    var tokenValue = document.getElementById("apiToken").value;
-    if (tokenValue == "") {
-      alert("Please InstaWP API Key");
-      document.getElementById("apiToken").focus();
-      return false;
-    } else {
-      localStorage.setItem("InstaWPAPIKey", tokenValue);
-      document.getElementById("apiToken").classList.add("displayNone");
-      document.getElementById("subminbtn").classList.add("displayNone");
-      location.reload(true);
-    }
-  }
-
-  function showLaunchThemebutton() {
-    var launcher = document
-      .querySelector(".button.button-secondary.alignleft")
-      .cloneNode(true);
-    launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
-    launcher.classList.add("instawp-btn");
-    launcher.classList.remove("button-secondary");
-    launcher.id = "instawp-btn-theme";
-    launcher.setAttribute("data-toggle", "on");
-    launcher.href = "javascript:void(0)";
-    launcher.addEventListener("click", showlist);
-    document.querySelector(".theme-actions.clear").appendChild(launcher);
-    callbtn();
-  }
-
-  function showAllSite() {
-    const modal = document.createElement("div");
-    modal.classList.add("modal");
-    // create the inner modal div with appended argument
-    const child = document.createElement("div");
-    child.classList.add("child", "modal-content");
-    const header = document.createElement("div");
-    header.classList.add("header", "flex", "justify-between", "w-full");
-    const h1div = document.createElement("div");
-    const h1 = document.createElement("h1");
-    h1.classList.add("site-heading", "font-semibold", "text-grayCust-1600");
-    h1.innerHTML = "All Sites";
-    h1div.appendChild(h1);
-    header.appendChild(h1div);
-    const items_center = document.createElement("div");
-    items_center.classList.add("w-48", "items-center", "px-2");
-    const shadow_sm = document.createElement("div");
-    shadow_sm.classList.add("shadow-sm", "flex");
-    items_center.appendChild(shadow_sm);
-    const label = document.createElement("label");
-    label.classList.add("sr-only");
-    label.setAttribute("for", "search");
-    shadow_sm.appendChild(label);
-    const relative = document.createElement("div");
-    relative.classList.add("relative");
-    const searchbox = document.createElement("input");
-    searchbox.classList.add("searchbox");
-    searchbox.id = "search";
-    searchbox.setAttribute("name", "Search");
-    searchbox.setAttribute("placeholder", "Search");
-    searchbox.setAttribute("type", "text");
-    searchbox.addEventListener("keyup", liveSearch);
-    relative.appendChild(searchbox);
-    shadow_sm.appendChild(relative);
-    header.appendChild(shadow_sm);
-
-    // header done
-    // body part
-    const modalBodyContainer = document.createElement("div");
-    modalBodyContainer.classList.add("modalBodyContainer", "modal-body");
-    const modalBody = document.createElement("div");
-    modalBody.classList.add("modal-body", "modal-body-content");
-    const tableBody = document.createElement("table");
-    tableBody.classList.add("tableBody");
-    tableBody.id = "paginated-list";
-    for (var i = 0; i < sites.length; i++) {
-      var tablerow = document.createElement("tr");
-      tablerow.classList.add("tablerow");
-      var tablerowdata = document.createElement("td");
-      tablerowdata.classList.add("tablerowdata");
-      var tablerowdatadiv1 = document.createElement("div");
-      tablerowdatadiv1.classList.add("siteNameDiv");
-      var tablerowdatadiv1Sitename = document.createElement("div");
-      tablerowdatadiv1Sitename.classList.add("siteNameDiv1");
-      var tablerowdatadiv1SiteWpVersion = document.createElement("span");
-      tablerowdatadiv1SiteWpVersion.classList.add("wpVersion");
-      tablerowdatadiv1SiteWpVersion.innerHTML =
-        "Wp Version: <b>" + siteWpVersion[i] + "</b>";
-      var tablerowdatadiv1SitePhpVersion = document.createElement("span");
-      tablerowdatadiv1SitePhpVersion.classList.add("phpVersion");
-      tablerowdatadiv1SitePhpVersion.innerHTML =
-        "PHP Version: <b>" + sitePhpVersion[i] + "</b> ";
-      var tablerowdataspanDiv = document.createElement("div");
-      tablerowdataspanDiv.classList.add("siteNameDivspan");
-      var tablerowdatadiv1Siteurl = document.createElement("span");
-      tablerowdatadiv1Siteurl.classList.add("siteUrl");
-      tablerowdatadiv1Siteurl.innerHTML = sitUrl[i];
-      var tablerowdatadiv1SiteTime = document.createElement("span");
-      tablerowdatadiv1SiteTime.classList.add("siteMadeTime");
-      // tablerowdatadiv1SiteTime.innerHTML = dateconversion(siteMadeTime[i]);
-      tablerowdatadiv1SiteTime.innerHTML =
-        "Added At: <b>" + siteMadeTime[i] + "</b>";
-      var tablerowdatadiv2 = document.createElement("div");
-      tablerowdatadiv2.classList.add("installBtn");
-      tablerowdatadiv2.innerHTML = "Install";
-      tablerowdatadiv2.id = sitID[i + 1];
-      tablerowdatadiv2.setAttribute("data-site-id", sitID[i + 1]);
-      tablerowdatadiv2.addEventListener("click", launchOptionSiteScript3);
-      tablerowdataspanDiv.appendChild(tablerowdatadiv1Siteurl);
-      tablerowdataspanDiv.appendChild(tablerowdatadiv1SiteTime);
-      tablerowdatadiv1.appendChild(tablerowdataspanDiv);
-      tablerowdatadiv1Sitename.appendChild(tablerowdatadiv1SiteWpVersion);
-      tablerowdatadiv1Sitename.appendChild(tablerowdatadiv1SitePhpVersion);
-      tablerowdatadiv1.appendChild(tablerowdatadiv1Sitename);
-      tablerowdata.appendChild(tablerowdatadiv1);
-      tablerowdata.appendChild(tablerowdatadiv2);
-      tablerow.appendChild(tablerowdata);
-      tableBody.appendChild(tablerow);
-    }
-    modalBody.appendChild(tableBody);
-    modalBodyContainer.appendChild(modalBody);
-    const footerbtnDiv = document.createElement("div");
-    footerbtnDiv.classList.add("footerbtnDiv");
-    footerbtnDiv.classList.add("pagination-container");
-    const pagination_numbers = document.createElement("div");
-    pagination_numbers.classList.add("pagination-numbers");
-    pagination_numbers.id = "pagination-numbers";
-    const footerbtnprevious = document.createElement("button");
-    footerbtnprevious.classList.add("footerbtnprevious", "pagination-button");
-    footerbtnprevious.id = "prev-button";
-    footerbtnprevious.innerHTML = "Previous";
-    const footerbtnNext = document.createElement("button");
-    footerbtnNext.classList.add("footerbtnNext", "pagination-button");
-    footerbtnNext.id = "next-button";
-    footerbtnNext.innerHTML = "Next";
-    footerbtnDiv.appendChild(footerbtnprevious);
-    footerbtnDiv.appendChild(pagination_numbers);
-    footerbtnDiv.appendChild(footerbtnNext);
-    var footerBtnCancel = document.createElement("div");
-    footerBtnCancel.classList.add("cancelBtn");
-    footerBtnCancel.innerHTML = "Cancel";
-    footerBtnCancel.addEventListener("click", removeModal);
-
-    child.appendChild(header);
-    child.appendChild(modalBodyContainer);
-    child.appendChild(footerbtnDiv);
-    child.appendChild(footerBtnCancel);
-
-    modal.appendChild(child);
-    document.body.appendChild(modal);
-    pagination();
-    // remove modal if background clicked
-    modal.addEventListener("click", (event) => {
-      if (event.target.className === "modal") {
-        removeModal();
+  chrome.runtime.sendMessage({ greeting: "checkLogin" }, function (response) {
+    console.log(response.farewell);
+    localStorage.setItem("isLoggedIn", response.farewell);
+    if (response.farewell == "loggedIn") {
+      if (
+        pathArray[1] == "plugins" &&
+        document.querySelector(".plugin-download")
+      ) {
+        //for plugin detail page
+        addPluginLaunchButton();
+      } else if (
+        pathArray[1] == "themes" &&
+        document.querySelector(".js-load-more-themes")
+      ) {
+        //for theme list page
+        addClickEventToThemeURL();
       }
-    });
-  }
+    }
+  });
 
   function callbtn() {
     pathArray = getURLPathArray();
     var array = sitName;
-    // array.unshift("Lanch New Website");
+    // console.log(sitName);
     var sitIDArray = sitID;
     // sitIDArray.unshift("1");
     var selectList = document.createElement("div");
@@ -353,16 +214,8 @@
         .appendChild(selectList);
     }
   }
-
-  function removeModal() {
-    // find the modal and remove if it exists
-    const modal = document.querySelector(".modal");
-    if (modal) {
-      modal.remove();
-    }
-  }
-
   function showlist() {
+    callbtn();
     var toggle = document
       .getElementById("instawp-btn-theme")
       .getAttribute("data-toggle");
@@ -383,14 +236,268 @@
     }
   }
 
+  function showLaunchThemebutton() {
+    var launcher = document
+      .querySelector(".button.button-secondary.alignleft")
+      .cloneNode(true);
+    launcher.innerHTML =
+      '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
+    launcher.classList.add("instawp-btn");
+    launcher.classList.remove("button-secondary");
+    launcher.id = "instawp-btn-theme";
+    launcher.setAttribute("data-toggle", "on");
+    launcher.href = "javascript:void(0)";
+    launcher.addEventListener("click", showlist);
+    document.querySelector(".theme-actions.clear").appendChild(launcher);
+  }
+
+  function addThemeLaunchButton() {
+    //add launch button to theme detail page.
+    var InstaWPAPIKey = localStorage.getItem("InstaWPAPIKey");
+    var isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn == "loggedIn") {
+      if (InstaWPAPIKey) {
+        addLaunchThemeButton();
+        showLaunchThemebutton();
+      } else {
+        addLaunchThemeButton();
+        generateLanchThemeButton();
+      }
+    } else {
+      addLaunchThemeButton();
+    }
+  }
+
+  function generateLanchThemeButton() {
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "apiToken");
+    input.setAttribute("class", "themeTokenInput");
+    input.setAttribute("placeholder", "Enter InstaWP API Key");
+    var button = document.createElement("input");
+    button.setAttribute("type", "button");
+    button.setAttribute("id", "subminbtn");
+    button.setAttribute("value", "Add");
+    button.setAttribute("class", "themeTokenSubmit");
+    document.querySelector(".theme-actions.clear").appendChild(input);
+    document.querySelector(".theme-actions.clear").appendChild(button);
+    button.addEventListener("click", launchThemeButton);
+  }
+
+  function launchThemeButton() {
+    var tokenValue = document.getElementById("apiToken").value;
+    if (tokenValue == "") {
+      alert("Please InstaWP API Key");
+      document.getElementById("apiToken").focus();
+      return false;
+    } else {
+      localStorage.setItem("InstaWPAPIKey", tokenValue);
+      document.getElementById("apiToken").classList.add("displayNone");
+      document.getElementById("subminbtn").classList.add("displayNone");
+      location.reload(true);
+    }
+  }
+
+  function showAllSite() {
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+    // create the inner modal div with appended argument
+    const child = document.createElement("div");
+    child.classList.add("child", "modal-content");
+    const header = document.createElement("div");
+    header.classList.add("header", "flex", "justify-between", "w-full");
+    const h1div = document.createElement("div");
+    const h1 = document.createElement("h1");
+    h1.classList.add("site-heading", "font-semibold", "text-grayCust-1600");
+    h1.innerHTML = "All Sites";
+    h1div.appendChild(h1);
+    header.appendChild(h1div);
+    const items_center = document.createElement("div");
+    items_center.classList.add("w-48", "items-center", "px-2");
+    const shadow_sm = document.createElement("div");
+    shadow_sm.classList.add("shadow-sm", "flex");
+    items_center.appendChild(shadow_sm);
+    // const label = document.createElement("label");
+    // label.classList.add("sr-only");
+    // label.setAttribute("for", "search");
+    // shadow_sm.appendChild(label);
+    const relative = document.createElement("div");
+    relative.classList.add("relative");
+    const searchbox = document.createElement("input");
+    searchbox.classList.add("searchbox");
+    searchbox.id = "search";
+    searchbox.setAttribute("name", "Search");
+    searchbox.setAttribute("placeholder", "Search");
+    searchbox.setAttribute("type", "text");
+    searchbox.addEventListener("keyup", liveSearch);
+    relative.appendChild(searchbox);
+    shadow_sm.appendChild(relative);
+    header.appendChild(shadow_sm);
+
+    // header done
+    // body part
+    const modalBodyContainer = document.createElement("div");
+    modalBodyContainer.classList.add("modalBodyContainer", "modal-body");
+    const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body", "modal-body-content");
+    const tableBody = document.createElement("table");
+    tableBody.classList.add("tableBody");
+    tableBody.id = "paginated-list";
+    for (var i = 0; i < sites.length; i++) {
+      var tablerow = document.createElement("tr");
+      tablerow.classList.add("tablerow");
+      var tablerowdata = document.createElement("td");
+      tablerowdata.classList.add("tablerowdata");
+      var tablerowdatadiv1 = document.createElement("div");
+      tablerowdatadiv1.classList.add("siteNameDiv");
+      var tablerowdatadiv1Sitename = document.createElement("div");
+      tablerowdatadiv1Sitename.classList.add("siteNameDiv1");
+      var tablerowdatadiv1SiteWpVersion = document.createElement("span");
+      tablerowdatadiv1SiteWpVersion.classList.add("wpVersion");
+      var tablerowdatadiv1SitePhpVersion = document.createElement("span");
+      tablerowdatadiv1SitePhpVersion.classList.add("phpVersion");
+      var tablerowdataspanDiv = document.createElement("div");
+      tablerowdataspanDiv.classList.add("siteNameDivspan");
+      var externalLink = document.createElement("img");
+      externalLink.src = chrome.runtime.getURL("iconImages/link2.png");
+      externalLink.setAttribute("height", "16");
+      externalLink.setAttribute("width", "16");
+      externalLink.setAttribute("alt", "openlink");
+      var copyLinkIcon = document.createElement("img");
+      copyLinkIcon.src = chrome.runtime.getURL("iconImages/copy.png");
+      copyLinkIcon.setAttribute("height", "16");
+      copyLinkIcon.setAttribute("data-url", sitUrl[i]);
+      copyLinkIcon.setAttribute("data-id", sitID[i]);
+      copyLinkIcon.setAttribute("width", "16");
+      copyLinkIcon.setAttribute("alt", "open");
+      copyLinkIcon.setAttribute("title", "Copy Url!");
+      copyLinkIcon.classList.add("tooltip");
+      var clockIcon = document.createElement("img");
+      clockIcon.src = chrome.runtime.getURL("iconImages/clock.png");
+      clockIcon.setAttribute("height", "16");
+      clockIcon.setAttribute("width", "16");
+      clockIcon.setAttribute("alt", "open");
+      var clockP = document.createElement("p");
+      clockP.classList.add("clockp");
+      clockP.innerHTML = siteMadeTime[i];
+      if (siteMadeTime[i] == "Site Expired") {
+        clockP.innerHTML = siteMadeTime[i] + "!!";
+        clockP.style.color = "red";
+      }
+      var wpIcon = document.createElement("img");
+      wpIcon.src = chrome.runtime.getURL("iconImages/wp.png");
+      wpIcon.setAttribute("height", "16");
+      wpIcon.setAttribute("width", "16");
+      wpIcon.setAttribute("alt", "open");
+      var wpP = document.createElement("p");
+      wpP.classList.add("wpP");
+      wpP.innerHTML = siteWpVersion[i];
+      var phpIcon = document.createElement("img");
+      phpIcon.src = chrome.runtime.getURL("iconImages/php2.png");
+      phpIcon.setAttribute("height", "16");
+      phpIcon.setAttribute("width", "16");
+      phpIcon.setAttribute("alt", "open");
+      var phpP = document.createElement("p");
+      phpP.classList.add("phpP");
+      phpP.innerHTML = sitePhpVersion[i];
+      var linkUrl = document.createElement("a");
+      linkUrl.classList.add("linkUrl");
+      linkUrl.href = sitUrl[i];
+      linkUrl.target = "_blank";
+      linkUrl.appendChild(externalLink);
+      var copyLink = document.createElement("p");
+      copyLink.classList.add("copyLink");
+      copyLink.id = "copyUrl";
+      copyLink.addEventListener("click", copyUrl);
+      var tooltipP = document.createElement("p");
+      tooltipP.classList.add("tooltip", "tooltippara", "copyLink");
+      var tooltip = document.createElement("span");
+      tooltip.classList.add("tooltiptext");
+      tooltip.setAttribute("id", sitID[i]);
+      tooltip.innerText = "Copied!!";
+      copyLink.appendChild(copyLinkIcon);
+      tooltipP.appendChild(tooltip);
+      var tablerowdatadiv1Siteurl = document.createElement("span");
+      tablerowdatadiv1Siteurl.classList.add("siteUrl");
+      tablerowdatadiv1Siteurl.innerHTML = sitUrl[i];
+      tablerowdatadiv1Siteurl.append(linkUrl);
+      tablerowdatadiv1Siteurl.append(copyLink);
+      tablerowdatadiv1Siteurl.append(tooltipP);
+      var tablerowdatadiv1SiteTime = document.createElement("span");
+      tablerowdatadiv1SiteTime.classList.add("siteMadeTime");
+      tablerowdatadiv1SiteTime.appendChild(clockIcon);
+      tablerowdatadiv1SiteTime.appendChild(clockP);
+      var tablerowdatadiv2 = document.createElement("div");
+      tablerowdatadiv2.classList.add("installBtn");
+      tablerowdatadiv2.innerHTML = "Install";
+      // tablerowdatadiv2.id = sitID[i];
+      tablerowdatadiv2.setAttribute("data-site-id", sitID[i]);
+      tablerowdatadiv2.addEventListener("click", launchOptionSiteScript3);
+      tablerowdataspanDiv.appendChild(tablerowdatadiv1Siteurl);
+      tablerowdataspanDiv.appendChild(tablerowdatadiv1SiteTime);
+      tablerowdatadiv1.appendChild(tablerowdataspanDiv);
+      tablerowdatadiv1Sitename.appendChild(wpIcon);
+      tablerowdatadiv1Sitename.appendChild(wpP);
+      tablerowdatadiv1Sitename.appendChild(phpIcon);
+      tablerowdatadiv1Sitename.appendChild(phpP);
+      tablerowdatadiv1.appendChild(tablerowdatadiv1Sitename);
+      tablerowdata.appendChild(tablerowdatadiv1);
+      tablerowdata.appendChild(tablerowdatadiv2);
+      tablerow.appendChild(tablerowdata);
+      tableBody.appendChild(tablerow);
+    }
+    modalBody.appendChild(tableBody);
+    modalBodyContainer.appendChild(modalBody);
+    const footerbtnDiv = document.createElement("div");
+    footerbtnDiv.classList.add("footerbtnDiv");
+    footerbtnDiv.classList.add("pagination-container");
+    const pagination_numbers = document.createElement("div");
+    pagination_numbers.classList.add("pagination-numbers");
+    pagination_numbers.id = "pagination-numbers";
+    const footerbtnprevious = document.createElement("button");
+    footerbtnprevious.classList.add("footerbtnprevious", "pagination-button");
+    footerbtnprevious.id = "prev-button";
+    footerbtnprevious.innerHTML = "Previous";
+    const footerbtnNext = document.createElement("button");
+    footerbtnNext.classList.add("footerbtnNext", "pagination-button");
+    footerbtnNext.id = "next-button";
+    footerbtnNext.innerHTML = "Next";
+    footerbtnDiv.appendChild(footerbtnprevious);
+    footerbtnDiv.appendChild(pagination_numbers);
+    footerbtnDiv.appendChild(footerbtnNext);
+    var footerBtnCancel = document.createElement("div");
+    footerBtnCancel.classList.add("cancelBtn");
+    footerBtnCancel.innerHTML = "Close";
+    footerBtnCancel.addEventListener("click", removeModal);
+    child.appendChild(header);
+    child.appendChild(modalBodyContainer);
+    child.appendChild(footerbtnDiv);
+    child.appendChild(footerBtnCancel);
+    modal.appendChild(child);
+    document.body.appendChild(modal);
+    pagination();
+    // remove modal if background clicked
+    modal.addEventListener("click", (event) => {
+      if (event.target.className === "modal") {
+        removeModal();
+      }
+    });
+  }
+  function removeModal() {
+    // find the modal and remove if it exists
+    const modal = document.querySelector(".modal");
+    if (modal) {
+      modal.remove();
+    }
+  }
   async function launchOptionSiteScript3(evt) {
     //launch instawp website to install theme.
     pathArray = getURLPathArray();
     var sitIDArray = evt.target.getAttribute("data-site-id");
     evt.target.classList.remove("check");
     evt.target.classList.add("loader");
-    console.log(sitIDArray);
-    console.log(pathArray[2]);
+    // console.log(sitIDArray);
+    // console.log(pathArray[2]);
     if (sitIDArray == 1) {
       launchSiteScript3();
     } else {
@@ -409,12 +516,16 @@
         }
       );
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       evt.target.classList.remove("loader");
       evt.target.classList.add("check");
-      var id = evt.target.id;
-      if (id) {
-        document.getElementById(id).innerHTML = "Installed";
+      var classname = evt.target.getAttribute("class");
+      if (classname == "installBtn check") {
+        evt.target.innerHTML = "Installed";
+        evt.target.style.pointerEvents = "none";
+      }
+      if (classname == "check") {
+        evt.target.style.pointerEvents = "none";
       }
     }
   }
@@ -483,7 +594,6 @@
     launcher.href = "javascript:void(0)";
     launcher.addEventListener("click", showlist);
     document.getElementsByClassName("plugin-actions")[0].appendChild(launcher);
-    callbtn();
   }
 
   async function launchOptionSiteScript2(evt) {
@@ -491,8 +601,8 @@
     var sitIDArray = evt.target.getAttribute("data-site-id");
     evt.target.classList.remove("check");
     evt.target.classList.add("loader");
-    console.log(sitIDArray);
-    console.log(pathArray[2]);
+    // console.log(sitIDArray);
+    // console.log(pathArray[2]);
     if (sitIDArray == 1) {
       launchSiteScript2();
     } else {
@@ -511,12 +621,16 @@
         }
       );
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       evt.target.classList.remove("loader");
       evt.target.classList.add("check");
-      var id = evt.target.id;
-      if (id) {
-        document.getElementById(id).innerHTML = "Installed";
+      var classname = evt.target.getAttribute("class");
+      if (classname == "installBtn check") {
+        evt.target.innerHTML = "Installed";
+        evt.target.style.pointerEvents = "none";
+      }
+      if (classname == "check") {
+        evt.target.style.pointerEvents = "none";
       }
     }
   }
@@ -551,33 +665,6 @@
     return pathArray;
   }
 
-  chrome.runtime.sendMessage({ greeting: "checkLogin" }, function (response) {
-    console.log(response.farewell);
-    if (response.farewell == "loggedIn") {
-      if (
-        pathArray[1] == "plugins" &&
-        document.querySelector(".plugin-download")
-      ) {
-        //for plugin detail page
-        addLaunchPluginButton();
-        addPluginLaunchButton();
-      } else if (
-        pathArray[1] == "themes" &&
-        document.querySelector(".button.button-secondary.alignleft")
-      ) {
-        //for theme detail page
-        addLaunchThemeButton();
-        addThemeLaunchButton();
-      } else if (
-        pathArray[1] == "themes" &&
-        document.querySelector(".js-load-more-themes")
-      ) {
-        //for theme list page
-        addClickEventToThemeURL();
-      }
-    }
-  });
-
   function liveSearch() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("search");
@@ -597,32 +684,13 @@
     }
   }
 
-  function addLaunchThemeButton() {
-    //add launch button to theme detail page.
-    var launcher = document
-      .querySelector(".button.button-secondary.alignleft")
-      .cloneNode(true);
-    launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch New Website';
-    launcher.classList.add("instawp-btn", "launchInstawp-btn");
-    launcher.classList.remove("button-secondary");
-    launcher.id = "instawp-btn";
-    launcher.href = "javascript:void(0)";
-    launcher.addEventListener("click", launchSiteScript3);
-    document.querySelector(".theme-actions.clear").appendChild(launcher);
-    addCloseButtonevent();
-  }
-  function addLaunchPluginButton() {
-    //add launch button to plugin detail page.
-    var launcher = document
-      .getElementsByClassName("plugin-download")[0]
-      .cloneNode(true);
-    launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Launch New Website';
-    launcher.classList.add("instawp-btn", "launchPluginInstawp-btn");
-    launcher.id = "instawp-btn";
-    launcher.href = "javascript:void(0)";
-    launcher.addEventListener("click", launchSiteScript2);
-    document.getElementsByClassName("plugin-actions")[0].appendChild(launcher);
+  function copyUrl(evt) {
+    var url = evt.target.getAttribute("data-url");
+    var id = evt.target.getAttribute("data-id");
+    navigator.clipboard.writeText(url);
+    document.getElementById(id).style.visibility = "visible";
+    setTimeout(function () {
+      document.getElementById(id).style.visibility = "hidden";
+    }, 500);
   }
 })();

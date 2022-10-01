@@ -1,250 +1,317 @@
 /************************** 21-09-2022 *******************/
 
 /* open sans font family */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,600;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,600;1,800&display=swap");
 /* inter font family */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;800;900&display=swap");
 
 body {
-    font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
+/**************** 28 Sept 2022 *******************/
+
+.modal-content
+  .modal-body
+  table
+  tr
+  .siteNameDiv
+  .siteNameDivspan
+  .siteUrl
+  a.linkUrl {
+  width: 20%;
+  margin-left: 10px;
+  margin-top: 1px;
+  float: right;
+}
+#copyUrl {
+  position: absolute;
+  right: 0px;
+  top: -9px;
+  width: auto;
+  margin: 0;
+  display: none;
+  padding: 10px;
+  z-index: 99999;
+  cursor: pointer;
+}
+.modal-content
+  .modal-body
+  table
+  tr
+  .siteNameDiv
+  .siteNameDivspan
+  .siteUrl:hover
+  #copyUrl {
+  display: block !important;
+}
+.modal-content
+  .modal-body
+  table
+  tr
+  .siteNameDiv
+  .siteNameDivspan
+  .siteMadeTime
+  img {
+  float: left;
+  width: auto;
+  max-width: 16px;
+}
+.siteNameDiv1 img {
+  height: 16px !important;
+  width: 16px !important;
+}
+.modal-content
+  .modal-body
+  table
+  tr
+  .siteNameDiv
+  .siteNameDivspan
+  .siteMadeTime
+  p.clockp {
+  float: left;
+  width: auto;
+  margin: 0;
+  margin-left: 10px;
+}
+
+/**************** 28 Sept 2022 *******************/
+
 .dropdown-content {
-    width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 .modal {
-    background: #4d4d4db3;
-    font-family: 'Inter', sans-serif;
+  background: #4d4d4db3;
+  font-family: "Inter", sans-serif;
 }
 
 .modal:target {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .site-heading {
-    font-size: 22px;
+  font-size: 22px;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .dropdown-menu {
-    transform: translate(-57px, 100%) !important;
+  transform: translate(-57px, 100%) !important;
 }
-
 
 /************** Modal Css Start From Here **************/
-/* .modal-open {
-    overflow: hidden;
-} */
 
-.modal-body-content {
-    min-height: 380px;
-    max-height: 380px;
+.siteNameDiv1 {
+  margin-top: 0px !important;
+  /* margin-bottom: 0px !important; */
 }
 
+.cancelBtn {
+  background-color: #18b781;
+  color: white !important;
+}
 .modal-content {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
 }
 
 .modal-content .header {
-    width: 100%;
-    float: left;
-    padding: 10px 0px;
+  width: 100%;
+  float: left;
+  padding: 10px 0px;
 }
 
 .modal-content .header .shadow-sm {
-    width: auto;
-    float: right;
+  width: auto;
+  float: right;
 }
 
 .modal-content .header div {
-    width: auto;
-    float: left;
+  width: auto;
+  float: left;
 }
 
 .modal-content .header div h1 {
-    margin: 0px;
-    width: auto;
-    float: left;
-    font-weight: bold;
-    color: #000;
+  margin: 0px;
+  width: auto;
+  float: left;
+  font-weight: bold;
+  color: #000;
 }
 
 .modal-content .modal-body {
-    width: 100%;
-    float: left;
-    margin: 0px !important;
-    border-radius: 10px;
-    padding: 0px !important;
-    border: 1px solid #ffffff;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
-    z-index: 999999;
-    border: none;
+  width: 100%;
+  float: left;
+  margin: 0px !important;
+  border-radius: 10px;
+  padding: 0px !important;
+  border: 1px solid #ffffff;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+  z-index: 999999;
+  border: none;
 }
 
 .modal-content .modal-body table tr .installBtn {
-    width: auto;
-    float: right;
-    border: 1px solid #ddd;
-    padding: 10px 35px;
-    cursor: pointer;
-    border-radius: 5px;
-    color: #025a02;
-    position: relative;
-    margin-top: 10px;
+  width: auto;
+  float: right;
+  border: 1px solid #ddd;
+  padding: 10px 35px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #025a02;
+  position: relative;
+  margin-top: 10px;
 }
 
 .modal-content .modal-body table tr .siteNameDiv {
-    color: #000;
-    font-size: 18px;
-    width: 65%;
-    float: left;
+  color: #000;
+  font-size: 18px;
+  width: 65%;
+  float: left;
 }
 
 .modal-content .modal-body table {
-    border-collapse: collapse;
-    font-size: 12.8px;
-    font-size: .8rem;
-    margin: 0px 0px;
-    padding: 0px 0px;
-    width: 100%;
-    background: transparent;
-    border-radius: 30px;
-    border: none;
+  border-collapse: collapse;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  margin: 0px 0px;
+  padding: 0px 0px;
+  width: 100%;
+  background: transparent;
+  border-radius: 30px;
+  border: none;
 }
 
 .modal-content .modal-body table tr:last-child td {
-    border-bottom: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 
 .modal-content .modal-body table tr td,
 .modal-content .modal-body table tr th {
-    border-bottom: 1px solid rgb(0 0 0 / 10%);
-    font-weight: 400;
-    margin: 0;
-    padding: .4rem;
-    text-align: left;
-    vertical-align: top;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+  font-weight: 400;
+  margin: 0;
+  padding: 0.4rem;
+  text-align: left;
+  vertical-align: top;
 }
 
 .child.modal-content .cancelBtn {
-    width: auto;
-    float: right;
-    text-align: center;
-    border: 1px solid #ddd;
-    margin: 10px 0px;
-    padding: 6px 30px;
-    border-radius: 5px;
-    color: #000;
-    cursor: pointer;
+  width: auto;
+  float: right;
+  text-align: center;
+  border: 1px solid #ddd;
+  margin: 10px 0px;
+  padding: 6px 30px;
+  border-radius: 5px;
+  color: #000;
+  cursor: pointer;
 }
 
 .modal-content .footerbtnprevious {
-    width: auto;
-    float: left;
-    margin-left: 30px;
-    position: relative;
-    cursor: pointer;
-    font-weight: 600;
-    color: #837c7c;
-    padding-top: 10px;
-    border-top: 2px solid transparent;
-    margin-top: 0px;
+  width: auto;
+  float: left;
+  margin-left: 30px;
+  position: relative;
+  cursor: pointer;
+  font-weight: 600;
+  color: #837c7c;
+  padding-top: 10px;
+  border-top: 2px solid transparent;
+  margin-top: 0px;
 }
 
-.modal-content .footerbtnprevious:hover {
-    border-top: 2px solid #c7c4c4;
-    width: auto;
-    margin-left: 30px;
-}
+/* .modal-content .footerbtnprevious:hover {
+  border-top: 2px solid #c7c4c4;
+  width: auto;
+  margin-left: 30px;
+} */
 
 .modal-content .footerbtnprevious:before {
-    position: absolute;
-    content: "<--";
-    color: #837c7c;
-    left: -30px;
-    top: 0px;
-    margin-top: 0;
-    padding-top: 8px;
+  position: absolute;
+  content: "<--";
+  color: #837c7c;
+  left: -30px;
+  top: 0px;
+  margin-top: 0;
+  padding-top: 8px;
 }
 
 .modal-content .footerbtnNext {
-    width: auto;
-    float: right;
-    margin-right: 30px;
-    position: relative;
-    cursor: pointer;
-    font-weight: 600;
-    color: #837c7c;
-    padding-top: 10px;
-    border-top: 2px solid transparent;
-    margin-top: 0px;
+  width: auto;
+  float: right;
+  margin-right: 30px;
+  position: relative;
+  cursor: pointer;
+  font-weight: 600;
+  color: #837c7c;
+  padding-top: 10px;
+  border-top: 2px solid transparent;
+  margin-top: 0px;
 }
 
-.modal-content .footerbtnNext:hover {
-    border-top: 2px solid #c7c4c4;
-    width: auto;
-    margin-right: 30px;
-}
+/* .modal-content .footerbtnNext:hover {
+  border-top: 2px solid #c7c4c4;
+  width: auto;
+  margin-right: 30px;
+} */
 
-.modal-content .modal-body table tr .installBtn:hover,
-.child.modal-content .cancelBtn:hover {
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    color: #18b781;
+.modal-content .modal-body table tr .installBtn:hover {
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  color: #18b781;
 }
 
 .modal-content .footerbtnNext:before {
-    position: absolute;
-    content: "-->";
-    color: #837c7c;
-    right: -30px;
-    top: 0;
-    margin-top: 10px;
+  position: absolute;
+  content: "-->";
+  color: #837c7c;
+  right: -30px;
+  top: 0;
+  margin-top: 10px;
 }
 
 .modal-content .footerbtnDiv {
-    width: 100%;
-    float: left;
-    margin: 20px 0px 0px;
-    border-top: 1px solid #cdcdcd;
-    padding: 0px;
+  width: 100%;
+  float: left;
+  margin: 20px 0px 0px;
+  border-top: 1px solid #cdcdcd;
+  padding: 0px;
 }
 
 .modal-content .header div input#search {
-    border: 1px solid #ddd;
-    border-radius: 5px 0px 0px 5px;
-    padding: 10px 10px;
-    width: 100%;
-    float: left;
-    max-width: 150px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0px 0px 5px;
+  padding: 10px 10px;
+  width: 100%;
+  float: left;
+  max-width: 150px;
 }
 
 .modal-content .header .shadow-sm label {
-    border: 1px solid #ddd;
-    padding: 21px 30px;
-    width: 30px;
-    height: 30px;
-    float: right;
-    border-radius: 0px 5px 5px 0px;
-    border-left: 0px;
-    position: relative;
-    box-sizing: border-box;
-    float: right;
+  border: 1px solid #ddd;
+  padding: 21px 30px;
+  width: 30px;
+  height: 30px;
+  float: right;
+  border-radius: 0px 5px 5px 0px;
+  border-left: 0px;
+  position: relative;
+  box-sizing: border-box;
+  float: right;
 }
 
 /*.modal-content .header .shadow-sm label:before {
@@ -256,356 +323,502 @@ body {
     text-align: center;
 }*/
 .modal-content .header .shadow-sm label::before {
-    position: absolute;
-    content: "";
-    display: block;
-    transform: scale(var(--ggs, 1));
-    width: 16px;
-    height: 16px;
-    border: 2px solid;
-    border-radius: 100%;
-    margin-left: -4px;
-    margin-top: -4px;
-    left: 23px;
-    top: 13px;
-    color: #888;
+  position: absolute;
+  content: "";
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  border-radius: 100%;
+  margin-left: -4px;
+  margin-top: -4px;
+  left: 23px;
+  top: 13px;
+  color: #888;
 }
 
 .modal-content .header .shadow-sm label::after {
-    content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    border-radius: 3px;
-    width: 2px;
-    height: 10px;
-    background: currentColor;
-    transform: rotate(130deg);
-    top: 20px;
-    left: 35px;
-    color: #888;
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+  transform: rotate(130deg);
+  top: 20px;
+  left: 35px;
+  color: #888;
+}
+.siteNameDiv1 {
+  font-size: medium !important;
 }
 
 .modal-content .modal-body table tr .siteNameDiv .siteNameDiv1 {
-    /* font-weight: bold; */
-    font-size: 16px;
-    /* text-transform: uppercase; */
+  float: left;
+  width: 100%;
+  margin: 10px 0px 0px;
 }
-.phpVersion{
-    margin-left: 10px;;
+.modal-content .modal-body table tr .siteNameDiv .siteNameDiv1 img {
+  width: auto;
+  float: left;
+}
+.modal-content .modal-body table tr .siteNameDiv .siteNameDiv1 p.wpP {
+  width: auto;
+  float: left;
+  margin: -4px 40px 0px 10px;
+}
+.modal-content .modal-body table tr .siteNameDiv .siteNameDiv1 p.phpP {
+  width: auto;
+  float: left;
+  margin: -5px 10px 0px 10px;
+}
+.phpVersion {
+  margin-left: 10px;
 }
 
 .modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteUrl {
-    width: auto;
-    float: left;
-    font-size: 12px;
-    font-weight: bold;
-    position: relative;
-    color: #464343;
+  width: 100%;
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  color: #464343;
 }
 
-.launchInstawp-btn{
-    width: 100% !important;
-    text-align: center !important;
-    margin-top: 8px !important;
+.modal-content
+  .modal-body
+  table
+  tr
+  .siteNameDiv
+  .siteNameDivspan
+  .siteUrl:hover {
+  color: #18b781;
 }
-.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteMadeTime {
-    width: auto;
-    float: left;
-    font-size: 13px;
-    position: relative;
-    color: #464343;
+
+.launchInstawp-btn {
+  width: 100% !important;
+  text-align: center !important;
+  margin-top: 8px !important;
+}
+.modal-content
+  .modal-body
+  table
+  tr
+  .siteNameDiv
+  .siteNameDivspan
+  .siteMadeTime {
+  width: auto;
+  float: left;
+  font-size: 13px;
+  position: relative;
+  color: #464343;
+  margin-top: 10px 0px;
 }
 
 .modal-content .modal-body table tr .siteNameDiv .siteNameDivspan {
-    width: 100%;
-    float: left;
+  width: 100%;
+  float: left;
 }
-
-.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteUrl {
-    position: relative;
-}
-
 #pagination-numbers {
-    width: 50%;
-    display: inline-block;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 10px;
+  width: 50%;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .footerbtnDiv.pagination-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 /************** Modal Css End Here **************/
+
+.modalBodyContainer.modal-body {
+  min-height: 387px !important;
+}
+
+button#prev-button,
+button#next-button {
+  margin-top: 10px;
+}
 
 #instawp-btn,
 #access_now_btn,
 .tokenSubmit,
 .themeTokenSubmit {
-    background-color: #18B781;
-    border-color: #18B781;
-    text-shadow: none;
-    color: white;
+  background-color: #18b781;
+  border-color: #18b781;
+  text-shadow: none;
+  color: white;
+}
+.tokenSubmit {
+  margin-top: 7px;
+  width: 18%;
+}
+
+svg {
+  width: 16px;
 }
 
 #instawp-btn,
 .tokenSubmit,
 .themeTokenInput,
 .themeTokenSubmit {
-    border-radius: 2px !important;
-    height: 35px;
-    border: 1px solid #18B781 !important;
+  border-radius: 2px !important;
+  height: 35px;
+  border: 1px solid #18b781 !important;
 }
 
 .themeTokenInput,
 .themeTokenSubmit {
-    border-radius: 2px !important;
-    margin-top: 10px;
+  border-radius: 2px !important;
+  margin-top: 10px;
 }
 
+.themeTokenInput,
 .themeTokenInput {
-    width: 80% !important;
+  width: 80% !important;
 }
 
 .themeTokenSubmit {
-    width: 18% !important;
+  width: 18% !important;
 }
-
 
 .displayNone {
-    display: none !important;
+  display: none !important;
 }
 
-
 .tokenInput {
-    height: 35px !important;
-    border-radius: 3px;
-    border-color: #18B781 !important;
+  height: 34px !important;
+  border-radius: 3px;
+  border-color: #18b781 !important;
+  float: left;
+  width: 80%;
+  margin-top: 8px;
 }
 
 .creact-btn {
-    background-color: #18B781 !important;
-    border-color: #18B781 !important;
-    text-shadow: none;
-    color: white !important;
-    border-radius: 2px;
-    font-weight: 700;
-    padding: 6px 18px !important;
-    cursor: pointer;
-    width: 15%;
-    margin: 12px !important;
-    height: 36px;
+  background-color: #18b781 !important;
+  border-color: #18b781 !important;
+  text-shadow: none;
+  color: white !important;
+  border-radius: 2px;
+  font-weight: 800;
+  padding: 6px 18px !important;
+  cursor: pointer;
+  width: 20%;
+  margin: 12px !important;
+  height: 37px;
+  text-align: center !important;
 }
 
 .swal-button {
-    background-color: #18B781 !important;
-    border-color: #18B781 !important;
-    text-shadow: none;
-    color: white !important;
+  background-color: #18b781 !important;
+  border-color: #18b781 !important;
+  text-shadow: none;
+  color: white !important;
 }
 
 .launchPluginBtn {
-    background-color: rgb(24, 183, 129) !important;
-    width: 100% !important;
-    float: right;
-    margin-top: 0px !important;
-    max-width: 54%;
-    color: #fff !important;
-    font-weight: bold !important;
-    border: none !important;
-    padding: 0px 5px !important;
-    height: 35px !important;
-    margin-left: 6px !important;
+  background-color: rgb(24, 183, 129) !important;
+  width: 100% !important;
+  float: right;
+  margin-top: 0px !important;
+  max-width: 54%;
+  color: #fff !important;
+  font-weight: bold !important;
+  border: none !important;
+  padding: 0px 5px !important;
+  height: 35px !important;
+  margin-left: 6px !important;
 }
 
-.type-plugin .plugin-header .plugin-actions a.plugin-download.button.download-button.button-large {
-    float: left;
-    width: auto;
+.type-plugin
+  .plugin-header
+  .plugin-actions
+  a.plugin-download.button.download-button.button-large {
+  float: left;
+  width: auto;
 }
 
 .type-plugin .plugin-header .plugin-actions {
-    float: right;
-    width: 26%;
-    margin: 0px !important;
-    padding: 0px !important;
+  float: right;
+  width: 26%;
+  margin: 0px !important;
+  padding: 0px !important;
+  position: relative;
 }
 
 /**************** 20-Sept.-2022 ***********************/
 
+/*div#instawp-btn-theme1 {
+  position: absolute;
+  top: 290px !important;
+  width: 248px;
+}*/
+
+/*.plugin-actions #instawp-btn-theme1 {
+  position: inherit;
+  top: 260px !important;
+  left: 955px;
+  width: 285px;
+}*/
+
+#instawp-btn-theme1 {
+  position: absolute;
+  right: 0;
+  top: 79px;
+}
+.theme-actions #instawp-btn-theme1 {
+  top: 122px;
+}
+.theme-actions {
+  position: relative;
+}
+
 #instawp-btn-theme {
-    position: relative;
-    height: 37px;
-    padding: 0px;
-    margin-bottom: 30px;
-    text-align: left;
-    width: 100%;
-    padding: 5px 5px;
-    background-color: #18b781;
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    border-radius: 3px;
-    border: none;
+  position: relative;
+  height: 35px;
+  padding: 0px;
+  margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
+  padding: 5px 5px;
+  background-color: #18b781;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  border-radius: 3px;
+  border: none;
 }
 
 .launchPluginBtn {
-    position: relative;
-    height: 37px;
-    padding: 0px;
-    margin-bottom: 30px;
-    text-align: left;
-    width: auto;
-    padding: 5px 5px;
-    background-color: #18b781;
-    color: #fff;
-    border-radius: 3px;
-    border: none;
-    float: right;
+  position: relative;
+  height: 35px;
+  padding: 0px;
+  margin-bottom: 30px;
+  text-align: left;
+  width: auto;
+  padding: 5px 5px;
+  background-color: #18b781;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  float: right;
 }
 
 #instawp-btn-theme:before,
 .launchPluginBtn:before {
-    position: absolute;
-    content: "";
-    top: 18px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: transparent transparent #ffffff transparent;
-    transform: rotate(180deg);
+  position: absolute;
+  content: "";
+  top: 18px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: transparent transparent #ffffff transparent;
+  transform: rotate(180deg);
 }
 
 .instawp-btn {
-    width: 100%;
-    float: left;
-    background-color: #fff;
-    border: 1px solid #efefef;
-    border-radius: 10px;
+  width: 100%;
+  float: left;
+  background-color: #fff;
+  border: 1px solid #efefef;
+  border-radius: 10px;
 }
 
 .instawp-btn ul {
-    width: 100%;
-    float: left;
-    padding: 0px;
-    list-style: none;
-    margin: 0;
+  width: 100%;
+  float: left;
+  padding: 0px;
+  list-style: none;
+  margin: 0;
 }
 
 .instawp-btn ul li {
-    width: 100%;
-    float: left;
-    text-align: center;
-    padding: 10px;
-    font-size: 16px;
-    border-bottom: 1px solid #efefef;
-    position: relative;
-    cursor: pointer;
+  width: 100%;
+  float: left;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #efefef;
+  position: relative;
+  cursor: pointer;
 }
 
 .instawp-btn ul li.loader:before,
 .modal-content .modal-body table tr .installBtn.loader:before {
-    position: absolute;
-    content: "";
-    top: 7px;
-    left: 10px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #18b781;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 2s linear infinite;
+  position: absolute;
+  content: "";
+  top: 8px;
+  left: 10px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #18b781;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 2s linear infinite;
 }
 
 .browsAllSite {
-    border-top: 2px solid;
-    color: #18b781;
-    font-weight: 600;
+  border-top: 2px solid;
+  color: #18b781;
+  font-weight: 600;
 }
 
 .instawp-btn ul li:hover,
 .loader,
 .check,
 .installBtn {
-    color: #18b781;
+  color: #18b781;
 }
 
-
 .modal {
-    top: 0%;
-    left: 0%;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999999;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999999;
 }
 
 .child {
-    top: 50%;
-    left: 50%;
-    width: 800px;
-    height: auto;
-    background: white;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 99999;
-    border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: auto;
+  background: white;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  border-radius: 10px;
 }
 
 :root {
-    --borderWidth: 4px;
-    --height: 24px;
-    --width: 12px;
-    --borderColor: rgb(24, 183, 129);
+  --borderWidth: 4px;
+  --height: 24px;
+  --width: 12px;
+  --borderColor: rgb(24, 183, 129);
 }
 
 .modal-content .modal-body table tr .installBtn:root {
-    --borderWidth: 4px;
-    --height: 15px;
-    --width: 8px;
-    --borderColor: rgb(24, 183, 129);
+  --borderWidth: 4px;
+  --height: 15px;
+  --width: 8px;
+  --borderColor: rgb(24, 183, 129);
 }
 
 .instawp-btn ul li.check:before {
-    position: absolute;
-    content: "";
-    top: 7px;
-    left: 20px;
-    display: inline-block;
-    transform: rotate(45deg);
-    height: var(--height);
-    width: var(--width);
-    border-bottom: var(--borderWidth) solid var(--borderColor);
-    border-right: var(--borderWidth) solid var(--borderColor);
-
+  position: absolute;
+  content: "";
+  top: 8px;
+  left: 20px;
+  display: inline-block;
+  transform: rotate(45deg);
+  height: var(--height);
+  width: var(--width);
+  border-bottom: var(--borderWidth) solid var(--borderColor);
+  border-right: var(--borderWidth) solid var(--borderColor);
 }
 
 .modal-content .modal-body table tr .installBtn.check:before {
-    position: absolute;
-    content: "";
-    top: 7px;
-    left: 15px;
-    display: inline-block;
-    transform: rotate(45deg);
-    height: var(--height);
-    width: var(--width);
-    border-bottom: var(--borderWidth) solid var(--borderColor);
-    border-right: var(--borderWidth) solid var(--borderColor);
-    color: #18b781;
+  position: absolute;
+  content: "";
+  top: 8px;
+  left: 15px;
+  display: inline-block;
+  transform: rotate(45deg);
+  height: var(--height);
+  width: var(--width);
+  border-bottom: var(--borderWidth) solid var(--borderColor);
+  border-right: var(--borderWidth) solid var(--borderColor);
+  color: #18b781;
 }
 
-
-
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.plugin-actions {
+  width: 30% !important;
+  float: right;
+}
+
+.plugin-actions a#instawp-btn {
+  width: auto;
+  float: left;
+  padding: 0px 10px;
+  margin-left: 7px;
+}
+
+a#instawp-btn-theme {
+  width: 100%;
+  float: left;
+  max-width: 100%;
+  margin-left: 0px !important;
+  margin-top: 7px !important;
+}
+
+.type-plugin
+  .plugin-header
+  .plugin-actions
+  a.plugin-download.button.download-button.button-large {
+  float: left;
+  width: auto;
+  padding: 0px 10px;
+}
+
+/**************************** 29-09-2022 **************************/
+
+p.tooltip.tooltippara.copyLink {
+  position: absolute;
+  z-index: 99999999;
+  right: -20px;
+  display: inline-block;
+  width: 100%;
+  height: 20px;
+  top: -45px;
+  max-width: 90px !important;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 100%;
+  max-width: 80px;
+  background-color: #18b781;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 0;
+  padding-top: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+  height: 35px;
+  margin-left: -60px;
+  z-index: 99999;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #18b781 transparent transparent transparent;
 }
