@@ -8,7 +8,6 @@
 body {
   font-family: "Open Sans", sans-serif;
 }
-<<<<<<< HEAD
 
 /**************** 28 Sept 2022 *******************/
 
@@ -77,8 +76,6 @@ body {
 }
 
 /**************** 28 Sept 2022 *******************/
-=======
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 
 .dropdown-content {
   width: 100%;
@@ -117,15 +114,9 @@ body {
 
 /************** Modal Css Start From Here **************/
 
-<<<<<<< HEAD
 .siteNameDiv1 {
   margin-top: 0px !important;
   /* margin-bottom: 0px !important; */
-=======
-.modal-body-content {
-  min-height: 380px;
-  max-height: 380px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 }
 
 .cancelBtn {
@@ -244,19 +235,11 @@ body {
   margin-top: 0px;
 }
 
-<<<<<<< HEAD
 /* .modal-content .footerbtnprevious:hover {
   border-top: 2px solid #c7c4c4;
   width: auto;
   margin-left: 30px;
 } */
-=======
-.modal-content .footerbtnprevious:hover {
-  border-top: 2px solid #c7c4c4;
-  width: auto;
-  margin-left: 30px;
-}
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 
 .modal-content .footerbtnprevious:before {
   position: absolute;
@@ -281,7 +264,6 @@ body {
   margin-top: 0px;
 }
 
-<<<<<<< HEAD
 /* .modal-content .footerbtnNext:hover {
   border-top: 2px solid #c7c4c4;
   width: auto;
@@ -289,16 +271,6 @@ body {
 } */
 
 .modal-content .modal-body table tr .installBtn:hover {
-=======
-.modal-content .footerbtnNext:hover {
-  border-top: 2px solid #c7c4c4;
-  width: auto;
-  margin-right: 30px;
-}
-
-.modal-content .modal-body table tr .installBtn:hover,
-.child.modal-content .cancelBtn:hover {
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   color: #18b781;
 }
@@ -379,7 +351,6 @@ body {
   top: 20px;
   left: 35px;
   color: #888;
-<<<<<<< HEAD
 }
 .siteNameDiv1 {
   font-size: medium !important;
@@ -445,54 +416,6 @@ body {
   position: relative;
   color: #464343;
   margin-top: 10px 0px;
-=======
-}
-
-.modal-content .modal-body table tr .siteNameDiv .siteNameDiv1 {
-  /* font-weight: bold; */
-  font-size: 16px;
-  /* text-transform: uppercase; */
-}
-.phpVersion {
-  margin-left: 10px;
-}
-
-.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteUrl {
-  width: auto;
-  float: left;
-  font-size: 12px;
-  font-weight: bold;
-  position: relative;
-  color: #464343;
-}
-
-.launchInstawp-btn {
-  width: 100% !important;
-  text-align: center !important;
-  margin-top: 8px !important;
-}
-.modal-content
-  .modal-body
-  table
-  tr
-  .siteNameDiv
-  .siteNameDivspan
-  .siteMadeTime {
-  width: auto;
-  float: left;
-  font-size: 13px;
-  position: relative;
-  color: #464343;
-}
-
-.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan {
-  width: 100%;
-  float: left;
-}
-
-.modal-content .modal-body table tr .siteNameDiv .siteNameDivspan .siteUrl {
-  position: relative;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 }
 
 .modal-content .modal-body table tr .siteNameDiv .siteNameDivspan {
@@ -584,22 +507,13 @@ svg {
   text-shadow: none;
   color: white !important;
   border-radius: 2px;
-<<<<<<< HEAD
-  font-weight: 800;
+  font-weight: 700;
   padding: 6px 18px !important;
   cursor: pointer;
   width: 20%;
   margin: 12px !important;
   height: 37px;
   text-align: center !important;
-=======
-  font-weight: 700;
-  padding: 6px 18px !important;
-  cursor: pointer;
-  width: 15%;
-  margin: 12px !important;
-  height: 36px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 }
 
 .swal-button {
@@ -636,10 +550,7 @@ svg {
   width: 26%;
   margin: 0px !important;
   padding: 0px !important;
-<<<<<<< HEAD
   position: relative;
-=======
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 }
 
 /**************** 20-Sept.-2022 ***********************/
@@ -671,11 +582,7 @@ svg {
 
 #instawp-btn-theme {
   position: relative;
-<<<<<<< HEAD
   height: 35px;
-=======
-  height: 37px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   padding: 0px;
   margin-bottom: 30px;
   text-align: left;
@@ -691,11 +598,7 @@ svg {
 
 .launchPluginBtn {
   position: relative;
-<<<<<<< HEAD
   height: 35px;
-=======
-  height: 37px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   padding: 0px;
   margin-bottom: 30px;
   text-align: left;
@@ -752,22 +655,13 @@ svg {
 .modal-content .modal-body table tr .installBtn.loader:before {
   position: absolute;
   content: "";
-<<<<<<< HEAD
   top: 8px;
-=======
-  top: 7px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   left: 10px;
   border: 5px solid #f3f3f3;
   border-top: 5px solid #18b781;
   border-radius: 50%;
-<<<<<<< HEAD
   width: 25px;
   height: 25px;
-=======
-  width: 30px;
-  height: 30px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   animation: spin 2s linear infinite;
 }
 
@@ -823,11 +717,7 @@ svg {
 .instawp-btn ul li.check:before {
   position: absolute;
   content: "";
-<<<<<<< HEAD
   top: 8px;
-=======
-  top: 7px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   left: 20px;
   display: inline-block;
   transform: rotate(45deg);
@@ -840,11 +730,7 @@ svg {
 .modal-content .modal-body table tr .installBtn.check:before {
   position: absolute;
   content: "";
-<<<<<<< HEAD
   top: 8px;
-=======
-  top: 7px;
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
   left: 15px;
   display: inline-block;
   transform: rotate(45deg);
@@ -853,7 +739,6 @@ svg {
   border-bottom: var(--borderWidth) solid var(--borderColor);
   border-right: var(--borderWidth) solid var(--borderColor);
   color: #18b781;
-<<<<<<< HEAD
 }
 
 @keyframes spin {
@@ -866,20 +751,6 @@ svg {
   }
 }
 
-=======
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
 .plugin-actions {
   width: 30% !important;
   float: right;
@@ -908,7 +779,6 @@ a#instawp-btn-theme {
   width: auto;
   padding: 0px 10px;
 }
-<<<<<<< HEAD
 
 /**************************** 29-09-2022 **************************/
 
@@ -952,5 +822,3 @@ p.tooltip.tooltippara.copyLink {
   border-style: solid;
   border-color: #18b781 transparent transparent transparent;
 }
-=======
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336

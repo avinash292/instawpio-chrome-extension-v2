@@ -8,34 +8,46 @@
     "default_title": "Open InstaWP Dashboard with version2"
   },
   "permissions": [
+    "scripting",
     "storage",
     "cookies",
-    "activeTab"
+    "activeTab",
+    "tabs",
+    "declarativeContent"
   ],
-  "host_permissions": ["https://app.instawp.io/*"],
-  "content_scripts": [{
-    "js": ["do.js", "swtalrt.js", "pagination.js"],
-    "css": ["style.css", "pagination.css"],
-    "matches": [
-      "https://wordpress.org/*",
-      "https://wordpress.org/plugins*",
-      "https://wordpress.org/themes*"
-    ]
-  }],
+  "host_permissions": ["https://s.instawp.io/*"],
+  "content_scripts": [
+    {
+      "js": ["do.js", "pagination.js"],
+      "css": ["style.css", "pagination.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "icons": {
     "16": "icon.png",
     "48": "icon.png",
-    "128": "icon.png"    
+    "128": "icon.png"
   },
-  "web_accessible_resources": [{
-<<<<<<< HEAD
-    "resources": ["do.js","iconImages/link.png","iconImages/link2.png","iconImages/copy.png","iconImages/copy2.png","iconImages/clock.png","iconImages/clock2.png","iconImages/wp.png","iconImages/wp2.png","iconImages/php.png","iconImages/php1.png","iconImages/php2.png"],
-=======
-    "resources": ["do.js","link.png","copy.png","clock.png","wordpress.png","php.png"],
->>>>>>> dd697b267c5e58bd9a18625aed866054359cc336
-    "matches": ["<all_urls>"]
-  }]
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "do.js",
+        "iconImages/link.png",
+        "iconImages/link2.png",
+        "iconImages/copy.png",
+        "iconImages/copy2.png",
+        "iconImages/clock.png",
+        "iconImages/clock2.png",
+        "iconImages/wp.png",
+        "iconImages/wp2.png",
+        "iconImages/php.png",
+        "iconImages/php1.png",
+        "iconImages/php2.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
