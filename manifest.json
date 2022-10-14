@@ -15,12 +15,16 @@
     "tabs",
     "declarativeContent"
   ],
-  "host_permissions": ["https://s.instawp.io/*"],
+  "host_permissions": ["https://app.instawp.io/*"],
   "content_scripts": [
     {
       "js": ["do.js", "pagination.js"],
       "css": ["style.css", "pagination.css"],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "https://wordpress.org/*",
+        "https://wordpress.org/plugins*",
+        "https://wordpress.org/themes*"
+      ]
     }
   ],
   "background": {

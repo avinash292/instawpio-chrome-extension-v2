@@ -1,6 +1,6 @@
 (function () {
   // console.log(localStorage.getItem(););
-  var urlarray = getURLPathArray();
+  var pathArray = getURLPathArray();
 
   function addLaunchThemeButton() {
     //add launch button to theme detail page.
@@ -35,7 +35,7 @@
     chrome.runtime.sendMessage({ message: "checkLogin" }, function (response) {
       // console.log("i am back");
       chrome.storage.local.get("chrome_insta_session_id", function (result) {
-        console.log(result["chrome_insta_session_id"]);
+        // console.log(result["chrome_insta_session_id"]);
         if (result["chrome_insta_session_id"] != "") {
           localStorage.setItem(
             "chrome_extension_id",
@@ -111,7 +111,6 @@
     fetchSite();
   }
 
-  pathArray = getURLPathArray();
   if (pathArray[1] == "plugins" && document.querySelector(".plugin-download")) {
     //for plugin detail page
     addLaunchPluginButton();

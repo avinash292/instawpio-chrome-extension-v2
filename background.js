@@ -1,21 +1,5 @@
 // event to run execute.js content when extension's button is clicked
 chrome.action.onClicked.addListener(execScript);
-
-// setTimeout(function () {
-//   var url = ".s.instawp.io";
-//   chrome.cookies.getAll({ domain: url }, function (cookies) {
-//     console.log(cookies);
-//   });
-//   chrome.storage.local.get(null, function (data) {
-//     console.log(data);
-//   });
-// }, 5000);
-
-// chrome.browserAction.onClicked.addListener(function (activeTab) {
-//   var newURL = "https://s.instawp.io/dashboard";
-//   chrome.tabs.create({ url: newURL });
-// });
-
 async function execScript() {
   const tabId = await getTabId();
   chrome.scripting.executeScript({
@@ -35,7 +19,7 @@ function functionToExecute() {
   obj["chrome_insta_session_id"] = localStorage.getItem(
     "chrome_insta_session_id"
   );
-  console.log(obj);
+  // console.log(obj);
   chrome.storage.local.set(obj);
   return obj;
 }
@@ -46,9 +30,9 @@ function getCurrentTab() {
     chrome.tabs.query({}, function (tabs) {
       tabs.forEach(function (tab) {
         var taxt = tab.url;
-        console.log(tab.url);
-        if (taxt.match("s.instawp.io")) {
-          console.log(tab.url);
+        // console.log(tab.url);
+        if (taxt.match("app.instawp.io")) {
+          // console.log(tab.url);
           tab_id = tab.id;
         }
       });
@@ -71,10 +55,10 @@ function getCurrentTab() {
           {
             pinned: false,
             active: false,
-            url: "https://s.instawp.io/dashboard",
+            url: "https://app.instawp.io/dashboard",
           },
           ({ id: createdTabId }) => {
-            console.log(createdTabId);
+            // console.log(createdTabId);
             chrome.scripting.executeScript(
               {
                 target: { tabId: createdTabId },
@@ -102,29 +86,3 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
   return true;
 });
-
-// async function fetchText() {
-//   let response = await fetch("https://app.instawp.io/login", {
-//     mode: "no-cors",
-//   });
-//   let data = await response.text();
-//   var position = data.search(/userEmail/);
-//   if (position > 0) {
-//     var loginStatus = "loggedIn";
-//   } else {
-//     var loginStatus = "NotlogIn";
-//   }
-//   return loginStatus;
-// }
-// const token = "U4Yyz2uT60ukHwEh7pQTMxqHCSFvzq3fpakfno7s";
-// async function fetchSite() {
-//   let response = await fetch("https://app.instawp.io/api/v1/sites", {
-//     headers: {
-//       "Content-type": "application/json",
-//       Authorization: `Bearer ${token}`, // notice the Bearer before your token
-//     },
-//   });
-//   let data = await response.json();
-//   console.log(data);
-// }
-// fetchSite();
