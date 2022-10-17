@@ -553,6 +553,40 @@ svg {
   position: relative;
 }
 
+/**************** 14-October-2022 Css Start Here ***********************/
+
+.theme-wrap .theme-actions a#instawp-btn {
+  width: 100% !important;
+  max-width: 100%;
+}
+.theme-wrap .theme-actions a#instawp-btn-theme {
+  width: 100%;
+  max-width: 14%;
+  margin-top: 8px !important;
+}
+.theme-wrap .theme-actions a#instawp-btn-theme::before {
+  right: 12px;
+  top: 16px;
+}
+
+.plugin-template-default a#instawp-btn {
+  width: 100% !important;
+  max-width: 69% !important;
+  text-align: center;
+}
+
+.class-plugin a#instawp-btn {
+  width: 100% !important;
+  max-width: 57% !important;
+}
+
+.class-theme .theme-wrap .theme-actions a#instawp-btn {
+  max-width: 100% !important;
+  width: 83% !important;
+}
+
+/**************** 14-October-2022 Css End Here ***********************/
+
 /**************** 20-Sept.-2022 ***********************/
 
 /*div#instawp-btn-theme1 {
@@ -571,10 +605,11 @@ svg {
 #instawp-btn-theme1 {
   position: absolute;
   right: 0;
-  top: 79px;
+  top: 39px;
+  z-index: 9999;
 }
 .theme-actions #instawp-btn-theme1 {
-  top: 122px;
+  top: 82px;
 }
 .theme-actions {
   position: relative;
@@ -615,7 +650,7 @@ svg {
 .launchPluginBtn:before {
   position: absolute;
   content: "";
-  top: 18px;
+  top: 17px;
   right: 10px;
   width: 0;
   height: 0;
@@ -752,7 +787,7 @@ svg {
 }
 
 .plugin-actions {
-  width: 30% !important;
+  width: 35% !important;
   float: right;
 }
 
@@ -766,9 +801,10 @@ svg {
 a#instawp-btn-theme {
   width: 100%;
   float: left;
-  max-width: 100%;
-  margin-left: 0px !important;
-  margin-top: 7px !important;
+  max-width: 10%;
+  margin-left: 6px !important;
+  margin-top: 0px !important;
+  border-radius: 2px;
 }
 
 .type-plugin

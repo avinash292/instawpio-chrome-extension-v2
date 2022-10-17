@@ -57,6 +57,7 @@
           ) {
             //for plugin detail page
             // addLaunchPluginButton();
+            document.body.classList.add("class-plugin");
             addPluginLaunchButton();
           } else if (
             pathArray[1] == "themes" &&
@@ -85,7 +86,6 @@
   var sitePhpVersion = [];
   var siteWpVersion = [];
   const token = localStorage.getItem("chrome_extension_id");
-
   async function fetchSite() {
     let siteResponse = await fetch(
       "https://app.instawp.io/api/v2/sites?page=1&per_page=10",
@@ -269,8 +269,8 @@
     var launcher = document
       .querySelector(".button.button-secondary.alignleft")
       .cloneNode(true);
-    launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
+    launcher.innerHTML = "";
+    // '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
     launcher.classList.add("instawp-btn");
     launcher.classList.remove("button-secondary");
     launcher.id = "instawp-btn-theme";
@@ -288,6 +288,7 @@
       if (chrome_extension_id) {
         addLaunchThemeButton();
         showLaunchThemebutton();
+        document.body.classList.add("class-theme");
       } else {
         addLaunchThemeButton();
         generateLanchThemeButton();
@@ -609,8 +610,8 @@
     var launcher = document
       .getElementsByClassName("plugin-download")[0]
       .cloneNode(true);
-    launcher.innerHTML =
-      '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
+    launcher.innerHTML = "";
+    // '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
     launcher.classList.add("instawp-btn", "launchPluginBtn");
     launcher.classList.remove("download-button");
     launcher.id = "instawp-btn-theme";

@@ -2,7 +2,7 @@
   "name": "InstaWP Launcher v2",
   "description": "Freshly baked WP instances with pre-loaded WP.org plugins/themes",
   "homepage_url": "https://app.instawp.io",
-  "version": "2.2",
+  "version": "2.3",
   "manifest_version": 3,
   "action": {
     "default_title": "Open InstaWP Dashboard with version2"
