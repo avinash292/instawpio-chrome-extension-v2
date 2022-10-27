@@ -235,12 +235,6 @@ body {
   margin-top: 0px;
 }
 
-/* .modal-content .footerbtnprevious:hover {
-  border-top: 2px solid #c7c4c4;
-  width: auto;
-  margin-left: 30px;
-} */
-
 .modal-content .footerbtnprevious:before {
   position: absolute;
   content: "<--";
@@ -263,12 +257,6 @@ body {
   border-top: 2px solid transparent;
   margin-top: 0px;
 }
-
-/* .modal-content .footerbtnNext:hover {
-  border-top: 2px solid #c7c4c4;
-  width: auto;
-  margin-right: 30px;
-} */
 
 .modal-content .modal-body table tr .installBtn:hover {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -314,14 +302,6 @@ body {
   float: right;
 }
 
-/*.modal-content .header .shadow-sm label:before {
-    position: absolute;
-    content: "#";
-    top: 10px;
-    left: 0;
-    right: 0;
-    text-align: center;
-}*/
 .modal-content .header .shadow-sm label::before {
   position: absolute;
   content: "";
@@ -588,20 +568,6 @@ svg {
 /**************** 14-October-2022 Css End Here ***********************/
 
 /**************** 20-Sept.-2022 ***********************/
-
-/*div#instawp-btn-theme1 {
-  position: absolute;
-  top: 290px !important;
-  width: 248px;
-}*/
-
-/*.plugin-actions #instawp-btn-theme1 {
-  position: inherit;
-  top: 260px !important;
-  left: 955px;
-  width: 285px;
-}*/
-
 #instawp-btn-theme1 {
   position: absolute;
   right: 0;

@@ -1,9 +1,6 @@
 (function () {
-  // console.log(localStorage.getItem(););
   var pathArray = getURLPathArray();
-
   function addLaunchThemeButton() {
-    //add launch button to theme detail page.
     var launcher = document
       .querySelector(".button.button-secondary.alignleft")
       .cloneNode(true);
@@ -17,8 +14,8 @@
     document.querySelector(".theme-actions.clear").appendChild(launcher);
     addCloseButtonevent();
   }
+
   function addLaunchPluginButton() {
-    //add launch button to plugin detail page.
     var launcher = document
       .getElementsByClassName("plugin-download")[0]
       .cloneNode(true);
@@ -33,9 +30,7 @@
 
   if (window.location.host == "wordpress.org") {
     chrome.runtime.sendMessage({ message: "checkLogin" }, function (response) {
-      // console.log("i am back");
       chrome.storage.local.get("chrome_insta_session_id", function (result) {
-        // console.log(result["chrome_insta_session_id"]);
         if (result["chrome_insta_session_id"] != "") {
           localStorage.setItem(
             "chrome_extension_id",
@@ -55,17 +50,12 @@
             pathArray[1] == "plugins" &&
             document.querySelector(".plugin-download")
           ) {
-            //for plugin detail page
-            // addLaunchPluginButton();
             document.body.classList.add("class-plugin");
             addPluginLaunchButton();
           } else if (
             pathArray[1] == "themes" &&
             document.querySelector(".button.button-secondary.alignleft")
           ) {
-            //for theme detail page
-            // addLaunchThemeButton();
-            // addThemeLaunchButton();
           } else if (
             pathArray[1] == "themes" &&
             document.querySelector(".js-load-more-themes")
@@ -97,22 +87,21 @@
       }
     );
     const SiteData = await siteResponse.json();
-    // console.log(SiteData);
     sites = SiteData.data;
+    const activesites = sites.filter((s) => !s.is_expired && !s.is_suspended);
+    console.log(sites);
+    console.log(activesites);
+    sites = activesites;
     sitName = sites.map((item) => item.name);
     sitID = sites.map((item) => item.id);
     sitUrl = sites.map((item) => item.url);
     siteMadeTime = sites.map((item) => item.expired_at_format);
     sitePhpVersion = sites.map((item) => item.php_version);
     siteWpVersion = sites.map((item) => item.wp_version);
-    // console.log(siteMadeTime);
-  }
-  if (token) {
-    fetchSite();
+    return true;
   }
 
   if (pathArray[1] == "plugins" && document.querySelector(".plugin-download")) {
-    //for plugin detail page
     addLaunchPluginButton();
   } else if (
     pathArray[1] == "themes" &&
@@ -126,7 +115,9 @@
     //for theme list page
     addClickEventToThemeURL();
   }
+
   addCreateWebsiteButton();
+
   function addClickEventToThemeURL() {
     //add onclick event to all theme detail urls.
     var el = document.querySelectorAll(".url");
@@ -141,7 +132,6 @@
   }
 
   function addClickenventToLoadMore() {
-    //add onclick event to all theme detail urls after load more theme.
     if (document.querySelector(".js-load-more-themes")) {
       var close_btn = document.querySelector(".js-load-more-themes");
       close_btn.onclick = function () {
@@ -153,7 +143,6 @@
   }
 
   function addCloseButtonevent() {
-    //add onclick event to back button of theme detail page.
     if (document.querySelector(".close")) {
       var close_btn = document.querySelector(".close");
       close_btn.onclick = function () {
@@ -171,8 +160,6 @@
       }
     }),
       false;
-
-    /* Adds Element AFTER NeighborElement */
     (Element.prototype.appendAfter = function (element) {
       if (element) {
         element.parentNode.insertBefore(this, element.nextSibling);
@@ -196,9 +183,7 @@
   function callbtn() {
     pathArray = getURLPathArray();
     var array = sitName;
-    // console.log(sitName);
     var sitIDArray = sitID;
-    // sitIDArray.unshift("1");
     var selectList = document.createElement("div");
     selectList.id = "instawp-btn-theme1";
     selectList.classList.add("instawp-btn", "displayNone", "displaypluginbtn");
@@ -243,6 +228,7 @@
         .appendChild(selectList);
     }
   }
+
   function showlist() {
     callbtn();
     var toggle = document
@@ -265,23 +251,24 @@
     }
   }
 
-  function showLaunchThemebutton() {
-    var launcher = document
-      .querySelector(".button.button-secondary.alignleft")
-      .cloneNode(true);
-    launcher.innerHTML = "";
-    // '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
-    launcher.classList.add("instawp-btn");
-    launcher.classList.remove("button-secondary");
-    launcher.id = "instawp-btn-theme";
-    launcher.setAttribute("data-toggle", "on");
-    launcher.href = "javascript:void(0)";
-    launcher.addEventListener("click", showlist);
-    document.querySelector(".theme-actions.clear").appendChild(launcher);
+  async function showLaunchThemebutton() {
+    const showSilt = await fetchSite();
+    if (showSilt) {
+      var launcher = document
+        .querySelector(".button.button-secondary.alignleft")
+        .cloneNode(true);
+      launcher.innerHTML = "";
+      launcher.classList.add("instawp-btn");
+      launcher.classList.remove("button-secondary");
+      launcher.id = "instawp-btn-theme";
+      launcher.setAttribute("data-toggle", "on");
+      launcher.href = "javascript:void(0)";
+      launcher.addEventListener("click", showlist);
+      document.querySelector(".theme-actions.clear").appendChild(launcher);
+    }
   }
 
   function addThemeLaunchButton() {
-    //add launch button to theme detail page.
     var chrome_extension_id = localStorage.getItem("chrome_extension_id");
     var extension_install = localStorage.getItem("extension_install");
     if (extension_install == "true") {
@@ -321,7 +308,6 @@
       document.getElementById("apiToken").focus();
       return false;
     } else {
-      // localStorage.setItem("chrome_extension_id", tokenValue);
       document.getElementById("apiToken").classList.add("displayNone");
       document.getElementById("subminbtn").classList.add("displayNone");
       location.reload(true);
@@ -331,7 +317,6 @@
   function showAllSite() {
     const modal = document.createElement("div");
     modal.classList.add("modal");
-    // create the inner modal div with appended argument
     const child = document.createElement("div");
     child.classList.add("child", "modal-content");
     const header = document.createElement("div");
@@ -363,8 +348,6 @@
     relative.appendChild(searchbox);
     shadow_sm.appendChild(relative);
     header.appendChild(shadow_sm);
-    // header done
-    // body part
     const modalBodyContainer = document.createElement("div");
     modalBodyContainer.classList.add("modalBodyContainer", "modal-body");
     const modalBody = document.createElement("div");
@@ -504,13 +487,13 @@
     modal.appendChild(child);
     document.body.appendChild(modal);
     pagination();
-    // remove modal if background clicked
     modal.addEventListener("click", (event) => {
       if (event.target.className === "modal") {
         removeModal();
       }
     });
   }
+
   function removeModal() {
     // find the modal and remove if it exists
     const modal = document.querySelector(".modal");
@@ -518,8 +501,8 @@
       modal.remove();
     }
   }
+
   async function launchOptionSiteScript3(evt) {
-    //launch instawp website to install theme.
     pathArray = getURLPathArray();
     var sitIDArray = evt.target.getAttribute("data-site-id");
     evt.target.classList.remove("check");
@@ -600,25 +583,29 @@
       document.getElementById("apiToken").focus();
       return false;
     } else {
-      // localStorage.setItem("chrome_extension_id", tokenValue);
       document.getElementById("apiToken").classList.add("displayNone");
       document.getElementById("subminbtn").classList.add("displayNone");
       location.reload(true);
     }
   }
-  function showLaunchluginbutton() {
-    var launcher = document
-      .getElementsByClassName("plugin-download")[0]
-      .cloneNode(true);
-    launcher.innerHTML = "";
-    // '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
-    launcher.classList.add("instawp-btn", "launchPluginBtn");
-    launcher.classList.remove("download-button");
-    launcher.id = "instawp-btn-theme";
-    launcher.setAttribute("data-toggle", "on");
-    launcher.href = "javascript:void(0)";
-    launcher.addEventListener("click", showlist);
-    document.getElementsByClassName("plugin-actions")[0].appendChild(launcher);
+  async function showLaunchluginbutton() {
+    const showSilt = await fetchSite();
+    if (showSilt) {
+      var launcher = document
+        .getElementsByClassName("plugin-download")[0]
+        .cloneNode(true);
+      launcher.innerHTML = "";
+      // '<img src="https://app.instawp.io/images/white.svg" width="18"> Select a website';
+      launcher.classList.add("instawp-btn", "launchPluginBtn");
+      launcher.classList.remove("download-button");
+      launcher.id = "instawp-btn-theme";
+      launcher.setAttribute("data-toggle", "on");
+      launcher.href = "javascript:void(0)";
+      launcher.addEventListener("click", showlist);
+      document
+        .getElementsByClassName("plugin-actions")[0]
+        .appendChild(launcher);
+    }
   }
 
   async function launchOptionSiteScript2(evt) {
@@ -714,4 +701,24 @@
       document.getElementById(id).style.visibility = "hidden";
     }, 500);
   }
+
+  document.body.addEventListener("click", function (evt) {
+    // console.log(evt.target.getAttribute("class"));
+    var clickbtn = document.getElementById("instawp-btn-theme");
+    if (
+      evt.target.getAttribute("id") != "instawp-btn-theme" &&
+      evt.target.getAttribute("class") != "browsAllSite" &&
+      evt.target.getAttribute("class") != "loader" &&
+      evt.target.getAttribute("class") !== null
+    ) {
+      console.log(evt.target.getAttribute("class"));
+      if (
+        document
+          .getElementById("instawp-btn-theme")
+          .getAttribute("data-toggle") == "off"
+      ) {
+        clickbtn.click();
+      }
+    }
+  });
 })();

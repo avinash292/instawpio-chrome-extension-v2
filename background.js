@@ -19,7 +19,6 @@ function functionToExecute() {
   obj["chrome_insta_session_id"] = localStorage.getItem(
     "chrome_insta_session_id"
   );
-  // console.log(obj);
   chrome.storage.local.set(obj);
   return obj;
 }
@@ -30,9 +29,7 @@ function getCurrentTab() {
     chrome.tabs.query({}, function (tabs) {
       tabs.forEach(function (tab) {
         var taxt = tab.url;
-        // console.log(tab.url);
         if (taxt.match("app.instawp.io")) {
-          // console.log(tab.url);
           tab_id = tab.id;
         }
       });
@@ -43,11 +40,7 @@ function getCurrentTab() {
             function: functionToExecute,
           },
           (resp) => {
-            // console.log(resp);
             resolve(resp);
-            // setTimeout(function () {
-            //   chrome.tabs.remove(createdTabId);
-            // }, 200);
           }
         );
       } else {
@@ -58,18 +51,13 @@ function getCurrentTab() {
             url: "https://app.instawp.io/dashboard",
           },
           ({ id: createdTabId }) => {
-            // console.log(createdTabId);
             chrome.scripting.executeScript(
               {
                 target: { tabId: createdTabId },
                 function: functionToExecute,
               },
               (resp) => {
-                // console.log(resp);
                 resolve(resp);
-                // setTimeout(function () {
-                //   chrome.tabs.remove(createdTabId);
-                // }, 200);
               }
             );
           }
